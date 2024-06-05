@@ -103,11 +103,13 @@ export default function DynamicPage() {
 
   return (
     <div
-      className={`pt-16 flex flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
+      className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
     >
       {isLoading && <p>Loading...</p>}
 
-      <div className="mx-auto w-[90%] md:w-[80%]  mt-10">
+      <div className="bg-gradient-to-b from-[#04152e51] to-[#04152E]   inset-0 h-screen absolute"></div>
+
+      <div className="mx-auto w-[90%] md:w-[80%] relative z-10 mt-10">
         {data && (
           <div className="flex flex-col md:flex-row gap-10">
             <div className="w-full rounded-xl overflow-hidden md:w-1/3">

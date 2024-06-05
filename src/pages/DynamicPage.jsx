@@ -106,7 +106,7 @@ export default function DynamicPage() {
 
   return (
     <div
-      className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
+      className={` flex relative flex-col justify-center items-center mt-10 text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
     >
       {isLoading && (
         <p className="text-4xl text-white text-center mt-42">Loading...</p>

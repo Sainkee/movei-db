@@ -16,6 +16,8 @@ export default function DynamicPage() {
   const { id } = useParams();
   const [cast, setCast] = useState(null);
   const [similar, setSimilar] = useState(null);
+  const [key, setKey] = useState(null);
+  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     const fetchDataAsync = async () => {
@@ -30,6 +32,9 @@ export default function DynamicPage() {
 
         const similarResponse = await fetchData(`movie/${id}/similar`);
         setSimilar(similarResponse);
+
+        const videoKey = await fetchData(`movie/${id}/videos`);
+        setKey(videoKey.results.find((v) => v.type === "Trailer").key);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -40,6 +45,14 @@ export default function DynamicPage() {
 
     fetchDataAsync();
   }, [id]);
+
+  const handleOpenTrailer = () => {
+    setShowTrailer(true);
+  };
+
+  const handleCloseTrailer = () => {
+    setShowTrailer(false);
+  };
 
   const renderMovieInfo = () => {
     return (
@@ -82,10 +95,11 @@ export default function DynamicPage() {
               text={`${data?.vote_average.toFixed(1)}%`}
             />
             <PlayCircleIcon
+              onClick={handleOpenTrailer}
               className={`w-full h-full text-yellow-400 cursor-pointer`}
             />
           </div>
-          <span className="text-2xl">Watch Trailer</span>
+          <span   onClick={handleOpenTrailer} className="text-2xl cursor-pointer">Watch Trailer</span>
         </div>
 
         <div className="my-2">
@@ -111,6 +125,7 @@ export default function DynamicPage() {
       {isLoading && (
         <p className="text-4xl text-white text-center mt-42">Loading...</p>
       )}
+
       <div className="bg-gradient-to-b from-[#04152e51] to-[#04152E] inset-0 h-screen absolute"></div>
       <div className="mx-auto w-[90%] md:w-[80%] relative z-10 mt-10">
         {data && (
@@ -192,6 +207,26 @@ export default function DynamicPage() {
           )}
         </div>
       </div>
+      {showTrailer && (
+        <div className="z-50 inset-0 fixed flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative">
+            <button
+              onClick={handleCloseTrailer}
+              className="absolute z-100 top-16 right-2 px-4 py-1 bg-transparent rounded-md text-white hover:bg-gray-700/50 transition-colors duration-300"
+            >
+              Close
+            </button>
+            <iframe
+              class="w-[100vw] h-[300px] sm:h-[450px] md:h-[600px] lg:h-[450px] xl:h-[600px]"
+              frameborder="0" 
+              src={`https://www.youtube.com/embed/${key}`}
+              title="YouTube video player"
+              allowFullScreen
+             
+            ></iframe>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,7 +4,10 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(90deg, #f89e00, #da2f68)',
+        "custom-gradient": "linear-gradient(90deg, #f89e00, #da2f68)",
+      },
+      color: {
+        "color-gradient": "linear-gradient(90deg, #f89e00, #da2f68)",
       },
     },
   },

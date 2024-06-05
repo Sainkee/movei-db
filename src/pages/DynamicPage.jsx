@@ -7,6 +7,7 @@ import { breakpoints } from "./Trending";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import fallbackImg from "../assets/movix.png";
+import { PlayCircleIcon } from "lucide-react";
 
 export default function DynamicPage() {
   const [data, setData] = useState(null);
@@ -59,52 +60,57 @@ export default function DynamicPage() {
               );
             })}
         </div>
-        <div className="flex gap-5 sm:gap-10 w-[120px] md:w-[70px] lg:w-[120px]">
-          <CircularProgressbar
-            styles={{
-              strokeLinecap: "round",
-              text: {
-                fill: "#fff",
-                fontSize: "1.5rem",
-              },
-              path: {
-                stroke: getColor(data?.vote_average),
-                strokeLinecap: "butt",
-              },
-              background: {
-                fill: "#3e98c7",
-              },
-            }}
-            value={data?.vote_average * 10}
-            text={`${data?.vote_average.toFixed(1)}%`}
-          />
+
+        <div className="flex my-5 gap-5 items-center">
+          <div className="flex items-center gap-5 sm:gap-10 w-[15rem] ">
+            <CircularProgressbar
+              styles={{
+                strokeLinecap: "round",
+                text: {
+                  fill: "#fff",
+                  fontSize: "1.5rem",
+                },
+                path: {
+                  stroke: getColor(data?.vote_average),
+                  strokeLinecap: "butt",
+                },
+                background: {
+                  fill: "#3e98c7",
+                },
+              }}
+              value={data?.vote_average * 10}
+              text={`${data?.vote_average.toFixed(1)}%`}
+            />
+            <PlayCircleIcon
+              className={`w-full h-full text-yellow-400 cursor-pointer`}
+            />
+          </div>
+          <span className="text-2xl">Watch Trailer</span>
         </div>
+
         <div className="my-2">
           <h1 className="text-4xl font-bold">Overview</h1>
-          <hr className="my-2 border-slate-600" />
-          <p className="text-white py-2">
-            <span className="text-gray-400">Status:</span> {data?.status}
-          </p>
-          <hr className="my-2 border-slate-600" />
-          <p className="text-white py-2">
-            <span className="text-gray-400">Director:</span> {data?.director}
-          </p>
-          <hr className="my-2 border-slate-600" />
-          <p className="text-white py-2">
-            <span className="text-gray-400">Writer:</span> {data?.writer}
-          </p>
-          <hr className="my-2 border-slate-600" />
-          <p className="text-white py-2">
-            <span className="text-gray-400">Creator:</span> {data?.creator}
-          </p>
+          {["status", "director", "writer", "creator"].map((field, index) => (
+            <div key={index}>
+              <hr className="my-2 border-slate-600" />
+              <p className="text-white py-2">
+                <span className="text-gray-400 capitalize">{field}:</span>{" "}
+                {data?.[field]}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     );
   };
 
   return (
-    <div className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}>
-      {isLoading && <p className="text-4xl text-white text-center mt-42">Loading...</p>}
+    <div
+      className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
+    >
+      {isLoading && (
+        <p className="text-4xl text-white text-center mt-42">Loading...</p>
+      )}
       <div className="bg-gradient-to-b from-[#04152e51] to-[#04152E] inset-0 h-screen absolute"></div>
       <div className="mx-auto w-[90%] md:w-[80%] relative z-10 mt-10">
         {data && (
@@ -116,13 +122,15 @@ export default function DynamicPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="w-full md:w-2/3">
-              {renderMovieInfo()}
-            </div>
+            <div className="w-full md:w-2/3">{renderMovieInfo()}</div>
           </div>
         )}
       </div>
-      <img src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`} alt="Background" className="absolute -z-10 top-0 left-0 right-0 bottom-0 w-full h-screen object-cover" />
+      <img
+        src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
+        alt="Background"
+        className="absolute -z-10 top-0 left-0 right-0 bottom-0 w-full h-screen object-cover"
+      />
       <div className="mx-auto w-[90%] md:w-[80%] mt-20">
         <div className="mb-2 md:mb-0">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Top Cast</h1>

@@ -3,6 +3,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
 import { getColor } from "../constants/Helper";
 const imageBaseURL = "https://image.tmdb.org/t/p/w500";
+import fallbackcard from "../assets/noposter.png";
 function formatDate(releaseDate) {
   if (!releaseDate) return "Unknown Date";
   const date = new Date(releaseDate);
@@ -21,10 +22,14 @@ export default function Card({ movie }) {
       className="relative w-full h-full  my-3 text-white rounded-t-xl cursor-pointer"
       onClick={() => navigate(`/Details/${movie.id}`)}
     >
-      {movie.poster_path && (
+      {
         <div className="relative rounded-md overflow-hidden">
           <img
-            src={`${imageBaseURL}${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `${imageBaseURL}${movie.poster_path}`
+                : fallbackcard
+            }
             className="object-cover w-full h-full rounded-t-xl duration-200 ease-in"
             alt={`${movie.title || movie.name} Poster`}
           />
@@ -35,7 +40,7 @@ export default function Card({ movie }) {
             </span>
           </div>
         </div>
-      )}
+      }
       <div className="-translate-y-10 px-3">
         <div
           className="bg-white rounded-full p-1"

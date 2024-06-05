@@ -4,7 +4,7 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-white py-10">
+    <footer className="bg-slate-900 text-white py-10 px-6 ">
       <div className="container mx-auto flex flex-col items-center">
         <div className="flex flex-wrap justify-center gap-6 mb-6">
           <Link to="/terms-of-use" className="text-sm">
@@ -23,7 +23,7 @@ const Footer = () => {
             FAQ
           </Link>
         </div>
-        <p className="text-center text-sm text-gray-700 max-w-2xl mx-auto mb-6">
+        <p className="text-center text-sm text-justify text-gray-700 max-w-2xl mx-auto mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut

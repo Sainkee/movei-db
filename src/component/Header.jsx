@@ -26,13 +26,13 @@ export default function Header() {
 
   return (
     <div
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      className={`fixed w-full top-0 z-50  transition-all duration-300 ${
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <header className=" py-4 backdrop-blur-md bg-transparent  text-white font-bold px-6">
-        <nav className="flex justify-between items-center md:w-[80%] mx-auto">
-          <Link to={"/"}>Movie</Link>
+      <header className=" py-4  backdrop-blur-md bg-transparent  text-white font-bold ">
+        <nav className="flex justify-between items-center mx-auto w-[90%] md:w-[80%]">
+          <Link className="text-3xl text-orange-500 " to={"/"}>Movie</Link>
           <div className="hidden md:flex gap-5">
             <Link to="/Explore/TV">TV show</Link>
             <Link to="/Explore/Movie">Movie Show</Link>

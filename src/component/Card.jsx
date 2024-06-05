@@ -2,7 +2,7 @@ import React from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
 import { getColor } from "../constants/Helper";
-const imageBaseURL = "https://image.tmdb.org/t/p/w500";
+
 import fallbackcard from "../assets/noposter.png";
 function formatDate(releaseDate) {
   if (!releaseDate) return "Unknown Date";
@@ -13,7 +13,7 @@ function formatDate(releaseDate) {
   return `${day} ${month} ${year}`;
 }
 
-export default function Card({ movie }) {
+export default function Card({ movie,imageBaseURL }) {
   console.log(movie);
   const navigate = useNavigate();
 

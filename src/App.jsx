@@ -4,6 +4,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 import Layout from "./component/Layout";
 import Home from "./component/Home";
+import SearchMovie from "./pages/SearchMovie";
 
 const DynamicPage = lazy(() => import("./pages/DynamicPage"));
 const TvShow = lazy(() => import("./pages/TVExplore"));
@@ -46,6 +47,10 @@ function App() {
         {
           path: "Details/:id",
           element: <DynamicPage />,
+        },
+        {
+          path: "search/:query",
+          element: <SearchMovie/>,
         },
         {
           path: "Explore/Movie",

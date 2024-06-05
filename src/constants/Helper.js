@@ -23,3 +23,9 @@ export const fetchData = async (param) => {
 }
 
 export default fetchData;
+
+export const getColor = (rating) => {
+  if (rating >= 7) return "rgba(62, 152, 199, 1)"; // blue
+  if (rating >= 4) return "rgba(255, 193, 7, 1)"; // yellow
+  return "rgba(220, 53, 69, 1)"; // red
+};

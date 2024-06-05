@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isHidden, setIsHidden] = useState(false);
@@ -29,12 +30,12 @@ export default function Header() {
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <header className="py-6 backdrop-blur-md bg-transparent text-white font-bold px-6">
+      <header className=" py-4 backdrop-blur-md bg-transparent  text-white font-bold px-6">
         <nav className="flex justify-between items-center md:w-[80%] mx-auto">
-          <div>Movie</div>
+          <Link to={"/"}>Movie</Link>
           <div className="hidden md:flex gap-5">
-            <span>TV show</span>
-            <span>Movie Show</span>
+            <Link to="/Explore/TV">TV show</Link>
+            <Link to="/Explore/Movie">Movie Show</Link>
           </div>
           <div className="md:hidden">
             <button onClick={toggleMobileMenu}>
@@ -59,13 +60,16 @@ export default function Header() {
             </button>
           </div>
         </nav>
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-gray-900 p-4">
-            <span className="block text-white mb-2">TV show</span>
-            <span className="block text-white">Movie Show</span>
+        
+      </header>
+      {isMobileMenuOpen && (
+          <div className="md:hidden bg-gray-900 ">
+           <div className="p-4">
+           <Link to="/Explore/TV" className="block text-white mb-2">TV show</Link>
+            <Link to="/Explore/Movie" className="block text-white">Movie Show</Link>
+           </div>
           </div>
         )}
-      </header>
     </div>
   );
 }

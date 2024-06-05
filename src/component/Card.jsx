@@ -2,8 +2,10 @@ import React from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
 import { getColor } from "../constants/Helper";
-
+const imageBaseURL = "https://image.tmdb.org/t/p/w500";
 import fallbackcard from "../assets/noposter.png";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 function formatDate(releaseDate) {
   if (!releaseDate) return "Unknown Date";
   const date = new Date(releaseDate);
@@ -13,8 +15,8 @@ function formatDate(releaseDate) {
   return `${day} ${month} ${year}`;
 }
 
-export default function Card({ movie,imageBaseURL }) {
-  console.log(movie);
+export default function Card({ movie }) {
+ 
   const navigate = useNavigate();
 
   return (
@@ -60,7 +62,7 @@ export default function Card({ movie,imageBaseURL }) {
               },
             }}
             value={movie.vote_average * 10}
-            text={`${movie.vote_average.toFixed(1)}%`}
+            text={`${movie.vote_average ? movie.vote_average.toFixed(1) : '-'}%`}
           />
         </div>
         <div className="flex flex-col pl-2 ">

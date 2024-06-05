@@ -30,7 +30,8 @@ export default function DynamicPage() {
         const similarResponse = await fetchData(`movie/${id}/similar`);
         setSimilar(similarResponse);
       } catch (err) {
-        setError(err);
+        console.error("Error fetching data:", err);
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +43,7 @@ export default function DynamicPage() {
   const renderMovieInfo = () => {
     return (
       <div className="">
-        <h1 className="text-3xl mb-5 md:text-4xl lg:text-6xl font-semibold">
+        <h1 className="text-3xl mb-5 md:text-3xl lg:text-6xl font-semibold">
           {data?.original_title}
         </h1>
         <div className="flex gap-1 py-2">
@@ -58,7 +59,7 @@ export default function DynamicPage() {
               );
             })}
         </div>
-        <div className="flex gap-5" style={{ width: 120, height: 120 }}>
+        <div className="flex gap-5 sm:gap-10 w-[120px] md:w-[70px] lg:w-[120px]">
           <CircularProgressbar
             styles={{
               strokeLinecap: "round",
@@ -102,39 +103,30 @@ export default function DynamicPage() {
   };
 
   return (
-    <div
-      className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}
-    >
-      {isLoading && <p>Loading...</p>}
-
-      <div className="bg-gradient-to-b from-[#04152e51] to-[#04152E]   inset-0 h-screen absolute"></div>
-
-      <div className="mx-auto w-[90%] md:w-[70%] relative z-10 mt-10">
+    <div className={`pt-16 flex relative flex-col justify-center text-white bg-gradient-to-b from-[#04152e51] to-[#04152E]`}>
+      {isLoading && <p className="text-4xl text-white text-center mt-42">Loading...</p>}
+      <div className="bg-gradient-to-b from-[#04152e51] to-[#04152E] inset-0 h-screen absolute"></div>
+      <div className="mx-auto w-[90%] md:w-[80%] relative z-10 mt-10">
         {data && (
           <div className="flex flex-col md:flex-row gap-10">
-            <div className="w-full rounded-xl overflow-hidden md:w-1/3">
+            <div className="w-full md:w-1/3 rounded-xl overflow-hidden">
               <img
                 src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
                 alt={data?.title}
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="w-full md:w-2/3">{renderMovieInfo()}</div>
+            <div className="w-full md:w-2/3">
+              {renderMovieInfo()}
+            </div>
           </div>
         )}
       </div>
-
-      <img
-        src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
-        alt="Background"
-        className="absolute -z-10 top-0 left-0 right-0 bottom-0 w-full h-screen object-cover"
-      />
-
+      <img src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`} alt="Background" className="absolute -z-10 top-0 left-0 right-0 bottom-0 w-full h-screen object-cover" />
       <div className="mx-auto w-[90%] md:w-[80%] mt-20">
         <div className="mb-2 md:mb-0">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Top Cast</h1>
         </div>
-
         <div className="flex overflow-x-auto gap-10 py-4 cursor-pointer">
           {cast && (
             <Swiper
@@ -169,11 +161,11 @@ export default function DynamicPage() {
             </Swiper>
           )}
         </div>
-
+      </div>
+      <div className="mx-auto w-[90%] md:w-[80%] mt-20">
         <div className="mb-2 mt-10 md:mb-0">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Similar Item</h1>
         </div>
-
         <div className="flex flex-wrap justify-center mt-8">
           {similar && (
             <Swiper

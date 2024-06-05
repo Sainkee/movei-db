@@ -43,7 +43,7 @@ export default function Hero() {
     if (!searchVal.current || !searchVal.current.value) {
       return;
     }
-    navigate(`search/${searchVal.current.value}`, { replace: true });
+    navigate(`search/${searchVal.current.value}`, { replace: false });
   };
 
   return (
@@ -61,7 +61,7 @@ export default function Hero() {
         Millions of movies, TV shows and people to discover. Explore now.
       </h4>
 
-      <form className="flex justify-center text-sm sm:text-base md:text-xl">
+      <form onSubmit={handleFormSubmit} className="flex justify-center text-sm sm:text-base md:text-xl">
         <input
           ref={searchVal}
           type="text"
@@ -70,8 +70,9 @@ export default function Hero() {
           className="w-full md:max-w-[55%] p-3 sm:p-4 px-4 sm:px-6 text-black rounded-l-full focus:outline-none"
         />
         <button
+        type="submit"
           className="bg-custom-gradient text-white px-4 sm:px-8 py-2 rounded-r-full"
-          onClick={handleFormSubmit}
+         
         >
           Search
         </button>

@@ -17,31 +17,27 @@ export default function SearchMovie() {
     }
   };
 
- 
+  console.log(query);
 
   useEffect(() => {
-    if (selectedGenre) {
-      const fetchMovies = async () => {
-        setLoading(true);
-        try {
-          const response = await fetchData(
-            `discover/movie?with_genres=${selectedGenre}&sort_by=${sort}&page=${page}`
-          );
-          console.log(response);
-          setMovies((prevMovies) => [...prevMovies, ...response.results]);
-        } catch (err) {
-          console.error("Error fetching movies:", err);
-        } finally {
-          setLoading(false);
-        }
-      };
+    const fetchMovies = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchData(
+          `search/multi?query=${query}&page=${page}`
+          
+        );
+        console.log(response);
+        setMovies((prevMovies) => [...prevMovies, ...response.results]);
+      } catch (err) {
+        console.error("Error fetching movies:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchMovies();
-    }
-  },  [page]);
-
-  
- 
+    fetchMovies();
+  }, [page,query]);
 
   useEffect(() => {
     window.addEventListener("scroll", scroller);
@@ -54,9 +50,8 @@ export default function SearchMovie() {
     <div className="w-[95%] md:w-[80%] my-20 mx-auto">
       <div className=" flex mb-10  flex-col  sm:flex-row justify-between text-white pt-10">
         <div className="mb-2  md:mb-0">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl">Explore Movie</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl">Search result for {query}</h1>
         </div>
-       
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">

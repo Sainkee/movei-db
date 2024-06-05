@@ -19,13 +19,6 @@ export default function MovieExplore() {
     }
   };
 
-  // discover/movie?sort_by=popularity.desc
-  // discover/movie?sort_by=popularity.asc
-  // discover/movie?sort_by=vote_average.desc
-  // discover/movie?sort_by=vote_average.asc
-  // discover/movie?sort_by=primary_release_date.desc
-  // discover/movie?sort_by=primary_release_date.asc
-  // discover/movie?sort_by=original_title.asc
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -104,6 +97,7 @@ export default function MovieExplore() {
                 </option>
               ))}
           </select>
+        
 
           <select onChange={handleSortChange} className="px-3 py-2 rounded-full bg-slate-600 text-white text-xs font-semibold" name="" id="">
             <option value="">Sort by</option>
@@ -128,7 +122,7 @@ export default function MovieExplore() {
             />
           ))}
       </div>
-      {loading && <div className="text-center text-white">Loading...</div>}
+      
     </div>
   );
 }

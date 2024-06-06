@@ -6,7 +6,7 @@ import Layout from "./component/Layout";
 import Home from "./component/Home";
 import SearchMovie from "./pages/SearchMovie";
 
-const DynamicPage = lazy(() => import("./pages/DynamicPage"));
+import DynamicPage from "./pages/DynamicPage";
 const TvShow = lazy(() => import("./pages/TVExplore"));
 const MovieShow = lazy(() => import("./pages/MovieExplore"));
 
